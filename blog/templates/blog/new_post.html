@@ -1,0 +1,199 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+{% if edit %}
+Edit Journal
+{% else %}
+New Journal
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-wrapper">
+
+<div class="container">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-10">
+
+<div class="editor-card">
+
+<div class="editor-header">
+
+<span class="welcome-badge">
+
+✍️ Journal Editor
+
+</span>
+
+<h1>
+
+{% if edit %}
+
+Edit Your Story
+
+{% else %}
+
+Write a New Story
+
+{% endif %}
+
+</h1>
+
+<p>
+
+Every beautiful story begins with a single sentence.
+
+</p>
+
+</div>
+
+<form
+method="POST"
+enctype="multipart/form-data">
+
+{% csrf_token %}
+
+<div class="mb-4">
+
+<label>
+
+Title
+
+</label>
+
+{{ form.title }}
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>
+
+Category
+
+</label>
+
+{{ form.category }}
+
+</div>
+
+<div class="col-md-6">
+
+<label>
+
+Cover Image
+
+</label>
+
+{{ form.image }}
+
+</div>
+
+</div>
+
+<div class="mt-4">
+
+<label>
+
+Short Description
+
+</label>
+
+{{ form.excerpt }}
+
+</div>
+
+<div class="mt-4">
+
+<label>
+
+Journal Content
+
+</label>
+
+{{ form.content }}
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-md-6">
+
+<div class="form-check form-switch">
+
+{{ form.featured }}
+
+<label class="form-check-label">
+
+Featured Story
+
+</label>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="form-check form-switch">
+
+{{ form.published }}
+
+<label class="form-check-label">
+
+Publish Immediately
+
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="text-end mt-5">
+
+<a
+href="{% url 'dashboard' %}"
+class="btn hero-btn-outline">
+
+Cancel
+
+</a>
+
+<button
+type="submit"
+class="btn hero-btn">
+
+{% if edit %}
+
+Update Story
+
+{% else %}
+
+Publish Story
+
+{% endif %}
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

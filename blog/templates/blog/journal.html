@@ -1,0 +1,140 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Journal | Mahak's Journal{% endblock %}
+
+{% block content %}
+
+<section class="hero" style="min-height:55vh;">
+
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+
+    <div class="container">
+
+        <div class="text-center" data-aos="fade-up">
+
+            <span class="welcome-badge">
+
+                📖 My Journal
+
+            </span>
+
+            <h1 class="hero-title">
+
+                Journal Entries
+
+            </h1>
+
+            <p class="hero-text">
+
+                Every story captures a moment.
+                Here's my collection of thoughts,
+                experiences and learnings.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<section class="latest-section">
+
+<div class="container">
+
+<div class="row g-4">
+
+{% for post in posts %}
+
+<div class="col-lg-4 col-md-6">
+
+<div class="journal-card">
+
+{% if post.image %}
+
+<img src="{{ post.image.url }}" alt="{{ post.title }}">
+
+{% else %}
+
+<img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=900">
+
+{% endif %}
+
+<div class="card-body">
+
+<small>
+
+<i class="bi bi-calendar3"></i>
+
+{{ post.created_at|date:"F d, Y" }}
+
+</small>
+
+<h3>
+
+{{ post.title }}
+
+</h3>
+
+<p>
+
+{{ post.excerpt }}
+
+</p>
+
+<a href="#">
+
+Read Entry
+
+<i class="bi bi-arrow-right"></i>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12">
+
+<div class="journal-card p-5 text-center">
+
+<i class="bi bi-journal-richtext display-3 text-muted"></i>
+
+<h2 class="mt-4">
+
+No Journal Entries Yet
+
+</h2>
+
+<p>
+
+Create your first journal entry from the admin panel.
+
+</p>
+
+<a href="/admin/" class="btn hero-btn">
+
+Go to Admin
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

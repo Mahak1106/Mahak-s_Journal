@@ -1,0 +1,59 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<section class="hero" style="min-height:100vh;">
+
+<div class="container">
+
+<div class="row justify-content-center">
+
+<div class="col-lg-6">
+
+<div class="editor-card">
+
+<h1 class="text-center mb-4">
+
+Create Account 🌸
+
+</h1>
+
+<form method="POST">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button type="submit" class="btn hero-btn w-100 mt-3">
+
+Register
+
+</button>
+
+</form>
+
+<p class="text-center mt-4">
+
+Already have an account?
+
+<a href="{% url 'login' %}">
+
+Login
+
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

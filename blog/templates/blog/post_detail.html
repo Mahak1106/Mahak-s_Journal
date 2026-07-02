@@ -1,0 +1,145 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+
+{{ post.title }}
+
+{% endblock %}
+
+{% block content %}
+
+<section class="hero" style="min-height:60vh;">
+
+<div class="container">
+
+<div class="text-center">
+
+<span class="welcome-badge">
+
+{{ post.category }}
+
+</span>
+
+<h1 class="hero-title">
+
+{{ post.title }}
+
+</h1>
+
+<p class="hero-text">
+
+{{ post.created_at|date:"F d, Y" }}
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="about-section">
+
+<div class="container">
+
+{% if post.image %}
+
+<img src="{{ post.image.url }}"
+
+class="img-fluid rounded shadow mb-5">
+
+{% endif %}
+
+<div class="quote-card">
+
+{{ post.content|linebreaks }}
+
+</div>
+
+<div class="mt-5">
+
+<a href="{% url 'journal' %}"
+
+class="btn hero-btn">
+
+← Back to Journal
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+{% if related_posts %}
+
+<section class="latest-section">
+
+<div class="container">
+
+<div class="section-heading">
+
+<h2>
+
+Related Posts
+
+</h2>
+
+</div>
+
+<div class="row g-4">
+
+{% for p in related_posts %}
+
+<div class="col-lg-4">
+
+<div class="journal-card">
+
+{% if p.image %}
+
+<img src="{{ p.image.url }}">
+
+{% endif %}
+
+<div class="card-body">
+
+<h3>
+
+{{ p.title }}
+
+</h3>
+
+<p>
+
+{{ p.excerpt }}
+
+</p>
+
+<a href="{% url 'post_detail' p.slug %}">
+
+Read →
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+{% endif %}
+
+{% endblock %}

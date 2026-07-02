@@ -1,0 +1,179 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}My Journal{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-wrapper">
+
+<div class="container">
+
+<div class="d-flex justify-content-between align-items-center mb-5">
+
+<div>
+
+<h1 class="hero-title" style="font-size:58px;">
+
+My Stories
+
+</h1>
+
+<p class="hero-text">
+
+Create, edit and manage your journal entries.
+
+</p>
+
+</div>
+
+<a href="{% url 'new_post' %}" class="btn hero-btn">
+
+<i class="bi bi-plus-circle-fill"></i>
+
+New Story
+
+</a>
+
+</div>
+
+
+
+<div class="row g-4">
+
+{% for post in posts %}
+
+<div class="col-lg-4 col-md-6">
+
+<div class="story-card">
+
+{% if post.image %}
+
+<img src="{{ post.image.url }}">
+
+{% else %}
+
+<div class="story-placeholder">
+
+🌸
+
+</div>
+
+{% endif %}
+
+<div class="story-content">
+
+<div class="d-flex justify-content-between align-items-center">
+
+<span class="story-category">
+
+{{ post.category }}
+
+</span>
+
+{% if post.featured %}
+
+<span class="badge bg-danger">
+
+Featured
+
+</span>
+
+{% endif %}
+
+</div>
+
+<h3>
+
+{{ post.title }}
+
+</h3>
+
+<p>
+
+{{ post.excerpt|truncatewords:18 }}
+
+</p>
+
+<small>
+
+<i class="bi bi-calendar3"></i>
+
+{{ post.created_at|date:"d M Y" }}
+
+</small>
+
+<hr>
+
+<div class="d-flex justify-content-between">
+
+<a href="{% url 'post_detail' post.slug %}"
+
+class="btn btn-outline-secondary">
+
+View
+
+</a>
+
+<a href="{% url 'edit_post' post.pk %}"
+
+class="btn btn-outline-primary">
+
+Edit
+
+</a>
+
+<a href="{% url 'delete_post' post.pk %}"
+
+class="btn btn-outline-danger">
+
+Delete
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<div class="col-12">
+
+<div class="editor-card text-center">
+
+<h2>
+
+No Stories Yet 🌸
+
+</h2>
+
+<p>
+
+Your journal is waiting for its first story.
+
+</p>
+
+<a href="{% url 'new_post' %}"
+
+class="btn hero-btn">
+
+Write First Story
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}
